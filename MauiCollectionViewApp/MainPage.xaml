@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiCollectionViewApp.MainPage"
+             x:Name="thisPage">
+    <ContentPage.Resources>
+        <!-- Changing Span to anything greater than 1 will work -->
+        <GridItemsLayout x:Key="TilesLayout"
+                         Span="1"
+                         Orientation="Vertical"
+                         HorizontalItemSpacing="10"
+                         VerticalItemSpacing="10" />
+        <DataTemplate x:Key="TileTemplate">
+            <Grid Margin="20"
+                  BackgroundColor="Gainsboro"
+                  VerticalOptions="Fill"
+                  HeightRequest="100">
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Text="{Binding Mode=OneWay}" 
+                       FontSize="Large"/>
+            </Grid>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <Grid>
+        <CollectionView BackgroundColor="LightBlue"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        ItemsSource="{Binding Path=Tiles, Mode=OneWay, Source={x:Reference thisPage}, TargetNullValue={x:Null}, FallbackValue={x:Null}}"
+                        ItemTemplate="{StaticResource TileTemplate}"
+                        ItemsLayout="{StaticResource TilesLayout}"
+                        ItemSizingStrategy="MeasureAllItems"
+                        SelectionMode="Single" />
+    </Grid>
+</ContentPage>
